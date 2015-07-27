@@ -8,8 +8,12 @@ function initialize(lon, lat) {
         center: { lat: lat, lng: lon},
         zoom: 8
     };
-    var map = new google.maps.Map(document.getElementById('map-canvas'),
-        mapOptions);
+    var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+    var marker = new google.maps.Marker({
+        position: {lat: lat, lng: lon},
+        map: map,
+        title: 'Current Location'
+    })
 }
 
 
@@ -33,6 +37,7 @@ function updatePosition(position){
     curLat = position.coords.latitude;
     curLon = position.coords.longitude;
     initialize(curLon, curLat);
+    alert("Testing position");
 }
 
 function showPosition(position){
