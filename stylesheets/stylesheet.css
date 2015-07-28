@@ -50,6 +50,15 @@ html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
 }
 
 #popup > button {
-    margin-left: 10px;
+    margin-left: 20px;
     margin-top:10px;
+}
+
+
+#doneBut {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-right: 10px;
+    margin-bottom:10px;
 }

@@ -33,7 +33,15 @@ window.addEventListener('load', function() {
         console.log("search button clicked");
         var popupdiv = document.getElementById("popup");
         popupdiv.style.display="block";
-        popup(popupdiv);
+    });
+    var exitBut = document.getElementById("exitBut");
+    exitBut.addEventListener('click', function() {
+        var popupdiv = document.getElementById("popup");
+        popupdiv.style.display="none";
+    });
+    var addPlace = document.getElementById("addPlace");
+    addPlace.addEventListener('click', function() {
+
     });
 });
 
@@ -59,10 +67,7 @@ function showPosition(position){
 }
 
 function popup(popupdiv) {
-    var exitBut = document.getElementById("exitBut");
-    exitBut.addEventListener('click', function() {
-        popupdiv.style.display="none";
-    });
+
     var input1 = document.getElementById("place1");
     var options = {};
     var autocomplete =new google.maps.places.Autocomplete(input1, options);

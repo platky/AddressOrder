@@ -4,6 +4,7 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link rel="stylesheet" href="stylesheets/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -23,10 +24,10 @@
   <div id="popup" >
     <a id="exitBut" href="#"><img src="images/exit-closed-symbol-hi.png"></a>
       <div id="pop-inputs">
-        <input class="place" id="place1" type="text">
+        <input class="place" id="place1" type="text"> <a href="#"><img src="images/edit_clear.png" width="20px" height="20px"></a><a href="#"><img src="images/delete.png" width="20px" height="20px"></a>
       </div>
-      <button type="button">Add Another Place</button>
-      <button type="button">Find Best Route</button>
+      <button id="addPlace" class="btn btn-default" type="button">Add Another Place</button>
+      <button id="doneBut" class="btn btn-default" type="button">Find Best Route</button>
   </div>
 
   <script src="javascripts/main.js"></script>
