@@ -1,18 +1,23 @@
 var curLat=0;
 var curLon=0;
-
+var map;
 
 function initialize(lon, lat) {
     console.log("initalizing map");
     var mapOptions = {
         center: { lat: lat, lng: lon},
-        zoom: 8
+        zoom: 14,
+        panControl: false,
+        streetViewControl: false,
+        mapTypeControl: false
+
     };
-    var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+    map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
     var marker = new google.maps.Marker({
         position: {lat: lat, lng: lon},
         map: map,
-        title: 'Current Location'
+        title: 'Current Location',
+        label: '0'
     })
 }
 
@@ -22,6 +27,14 @@ function initialize(lon, lat) {
 window.addEventListener('load', function() {
     console.log("window loaded");
     getLocation();
+
+    var search = document.getElementById("search");
+    search.addEventListener('click', function () {
+        console.log("search button clicked");
+        var popupdiv = document.getElementById("popup");
+        popupdiv.style.display="block";
+        popup(popupdiv);
+    });
 });
 
 function getLocation(){
@@ -37,10 +50,21 @@ function updatePosition(position){
     curLat = position.coords.latitude;
     curLon = position.coords.longitude;
     initialize(curLon, curLat);
-    alert("Testing position");
+    //alert("Testing position");
 }
 
 function showPosition(position){
     alert("Latitude is " + position.coords.latitude +"\nLongitude is "+ position.coords.longitude);
     console.log("Latitude is " + position.coords.latitude +" Longitude is "+ position.coords.longitude);
+}
+
+function popup(popupdiv) {
+    var exitBut = document.getElementById("exitBut");
+    exitBut.addEventListener('click', function() {
+        popupdiv.style.display="none";
+    });
+    var input1 = document.getElementById("place1");
+    var options = {};
+    var autocomplete =new google.maps.places.Autocomplete(input1, options);
+    //refine it better so that it only gives options within current country/city etc.
 }

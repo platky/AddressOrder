@@ -4,8 +4,7 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -14,9 +13,21 @@
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7FuaGVPmmBPHh9Kk1X8rdZlOD-0lNDuc">
     </script>
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
   </head>
   <body>
   <div id="map-canvas"></div>
+  <div id="controls">
+      <a href="#"><img id="search" src="images/search.png"></a>
+  </div>
+  <div id="popup" >
+    <a id="exitBut" href="#"><img src="images/exit-closed-symbol-hi.png"></a>
+      <div id="pop-inputs">
+        <input class="place" id="place1" type="text">
+      </div>
+      <button type="button">Add Another Place</button>
+      <button type="button">Find Best Route</button>
+  </div>
 
   <script src="javascripts/main.js"></script>
   </body>
