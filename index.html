@@ -12,9 +12,8 @@
 
     <title>Addressorder by platky</title>
     <script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7FuaGVPmmBPHh9Kk1X8rdZlOD-0lNDuc">
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7FuaGVPmmBPHh9Kk1X8rdZlOD-0lNDuc&libraries=places">
     </script>
-      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
   </head>
   <body>
   <div id="map-canvas"></div>
@@ -24,10 +23,10 @@
   <div id="popup" >
     <a id="exitBut" href="#"><img src="images/exit-closed-symbol-hi.png"></a>
       <div id="pop-inputs">
-        <input class="place" id="place1" type="text"> <a href="#"><img src="images/edit_clear.png" width="20px" height="20px"></a><a href="#"><img src="images/delete.png" width="20px" height="20px"></a>
       </div>
       <button id="addPlace" class="btn btn-default" type="button">Add Another Place</button>
       <button id="doneBut" class="btn btn-default" type="button">Find Best Route</button>
+      <p id="error"></p>
   </div>
 
   <script src="javascripts/main.js"></script>

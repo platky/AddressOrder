@@ -1,6 +1,7 @@
 var curLat=0;
 var curLon=0;
 var map;
+var labelList=[];
 
 function initialize(lon, lat) {
     console.log("initalizing map");
@@ -33,6 +34,9 @@ window.addEventListener('load', function() {
         console.log("search button clicked");
         var popupdiv = document.getElementById("popup");
         popupdiv.style.display="block";
+        if(labelList.length==0){
+            popup();
+        }
     });
     var exitBut = document.getElementById("exitBut");
     exitBut.addEventListener('click', function() {
@@ -41,7 +45,8 @@ window.addEventListener('load', function() {
     });
     var addPlace = document.getElementById("addPlace");
     addPlace.addEventListener('click', function() {
-
+        var popupdiv = document.getElementById("popup");
+        popup();
     });
 });
 
@@ -66,10 +71,69 @@ function showPosition(position){
     console.log("Latitude is " + position.coords.latitude +" Longitude is "+ position.coords.longitude);
 }
 
-function popup(popupdiv) {
+function popup() {
+    var popupdiv = document.getElementById("pop-inputs");
+    var popdiv = document.createElement('div');
+    var input = document.createElement('input');
+    var cleana = document.createElement('a');
+    var cleani = document.createElement('img');
+    var dela = document.createElement('a');
+    var deli = document.createElement('img');
 
-    var input1 = document.getElementById("place1");
+    input.className="place";
+    input.id="inputPlace";
+    input.type="text";
+    popdiv.appendChild(input);
+
+    cleana.href="#";
+    cleani.src="images/edit_clear.png";
+    cleani.style.width="20px";
+    cleani.style.height="20px";
+    cleana.appendChild(cleani);
+    popdiv.appendChild(cleana);
+    cleana.addEventListener('click', function() {
+        console.log("brush");
+        var curDiv = cleana.parentNode;
+        var children = curDiv.childNodes;
+        children[0].value="";
+    });
+
+
+    dela.href="#";
+    deli.src="images/delete.png";
+    deli.style.width="20px";
+    deli.style.height="20px";
+    dela.appendChild(deli);
+    popdiv.appendChild(dela);
+    dela.addEventListener('click', function() {
+        var curDiv = dela.parentNode;
+        curDiv.parentNode.removeChild(curDiv);var addBut = document.getElementById("addPlace");
+        for(var i=0; i<labelList.length; i++) {
+            if(labelList[i]==curDiv){
+                console.log("found in list at index "+i);
+                labelList.splice(i,1);
+                break;
+            }
+        }
+        if(labelList.length ==5){
+            addBut.style.display="none";
+        } else {
+            addBut.style.display="block";
+        }
+        console.log("REMOVE: the list is size "+labelList.length);
+    });
+
     var options = {};
-    var autocomplete =new google.maps.places.Autocomplete(input1, options);
+    var autocomplete =new google.maps.places.Autocomplete(input, options);
     //refine it better so that it only gives options within current country/city etc.
+
+    labelList.push(popdiv);
+    popupdiv.appendChild(popdiv);
+    var addBut = document.getElementById("addPlace");
+    console.log("the list is size "+labelList.length);
+    if(labelList.length ==5){
+        addBut.style.display="none";
+    } else {
+        addBut.style.display="block";
+    }
 }
