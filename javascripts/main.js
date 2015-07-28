@@ -1,10 +1,14 @@
 var curLat=0;
 var curLon=0;
 var map;
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
 var labelList=[];
+var waypnts = [];
 
 function initialize(lon, lat) {
     console.log("initalizing map");
+    directionsDisplay = new google.maps.DirectionsRenderer();
     var mapOptions = {
         center: { lat: lat, lng: lon},
         zoom: 14,
@@ -14,12 +18,13 @@ function initialize(lon, lat) {
 
     };
     map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
-    var marker = new google.maps.Marker({
+    /*var marker = new google.maps.Marker({
         position: {lat: lat, lng: lon},
         map: map,
         title: 'Current Location',
-        label: '0'
-    })
+        label: 'A'
+    });*/
+    directionsDisplay.setMap(map);
 }
 
 
@@ -47,6 +52,17 @@ window.addEventListener('load', function() {
     addPlace.addEventListener('click', function() {
         var popupdiv = document.getElementById("popup");
         popup();
+    });
+    var goBut = document.getElementById("doneBut");
+    goBut.addEventListener('click', function() {
+        if(checkWayPoints()){
+            mapDirections();
+            var popupdiv = document.getElementById("popup");
+            popupdiv.style.display="none";
+        } else {
+            var errorMes = document.getElementById("error");
+            errorMes.innerText="You must fill all available boxes or remove unnecessary ones";
+        }
     });
 });
 
@@ -136,4 +152,34 @@ function popup() {
     } else {
         addBut.style.display="block";
     }
+}
+
+function mapDirections() {
+
+    var request = {
+        origin: {lat: curLat, lng: curLon},
+        destination: {lat: curLat, lng: curLon},
+        waypoints: waypnts,
+        optimizeWaypoints: true,
+        travelMode: google.maps.TravelMode.DRIVING
+    };
+    directionsService.route(request, function(response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+        }
+    });
+}
+
+function checkWayPoints() {
+    waypnts=[];
+    for (var i=0; i<labelList.length; i++){
+        var curDiv = labelList[i];
+        var children = curDiv.childNodes;
+        if(children[0].value==""){
+            return false;
+        } else {
+            waypnts.push({location: children[0].value, stopover: true});
+        }
+    }
+    return true;
 }

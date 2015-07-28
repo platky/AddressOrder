@@ -15,7 +15,7 @@ html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
     }
 }
 
-@media screen and (min-width: 320px) and (min-device-width: 320px) {
+@media screen and (min-width: 450px) and (min-device-width: 450px) {
     #search {
         width: 64px;
         height: 64px;
