@@ -1,2 +1,2 @@
 # AddressOrder
-Put in multiple addresses and display the optimal route in google maps through all of them
+Put in multiple addresses and display the optimal route in google maps through all of them. Optimized for mobile devices.
